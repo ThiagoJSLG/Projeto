@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+    <%- include("../partials/cabecalho.ejs") %>
+</head>
+<body>
+    <h3>
+        Usuário: <%= usuario._id %>
+    </h3>
+        <div>
+            Seu nome é <%= usuario.nome %>
+        </div>
+        <div>
+            e seu email é: <%= usuario.email %>
+        </div>
+        <div>
+            e sua senha é: <%= usuario.senha %>
+        </div>
+
+        </a>
+        <%- include("../partials/rodape.ejs") %>
+</body>
+</html>

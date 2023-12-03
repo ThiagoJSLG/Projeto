@@ -1,0 +1,55 @@
+<% /* app.get("/", function(req,res){
+    res.render("index");
+
+})
+
+app.get("/", function(req, res){
+    const pessoa = {
+        nome:"Rafael";
+        curso:"Computação";
+    };
+    res.render("index", {pessoa});
+})
+*/ %>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial">
+        <title>Document</title>
+        <link rel="stylesheet" href="/css/style.css">
+        <%- include("partials/cabecalho.ejs") %>
+        
+    </head>
+
+
+
+    <body>
+        <h3>Triste</h3>
+
+        <div>
+            <%= pessoa.nome %>
+        </div>
+
+        <div>
+            <%= pessoa.curso %>
+        </div>
+
+        <% if (pessoa.curso == "Computação"){%>
+            <div>Seu Curso é o melhor!</div>
+        
+        <% } %>
+
+        <a href="/clientes">Listar Clientes</a><br>
+        <a href="/clientes/cadastrar">Cadastrar Clientes</a><br>
+
+        <a href="/usuarios">Listar Usuarios</a><br>
+        <a href="/usuarios/cadastrar">Cadastrar Usuarios</a><br>
+
+        <%- include("partials/rodape.ejs") %>
+
+    </body>
+</html>

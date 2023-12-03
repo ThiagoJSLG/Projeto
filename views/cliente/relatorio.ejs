@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+    <%- include("../partials/cabecalho.ejs") %>
+</head>
+<body>
+    <% if (salvo!=undefined) {%>
+        <div style="background-color: mediumspringgreen;">Cliente Cadastrado com sucesso</div>
+    <% } %>
+
+    <% if (removido!=undefined) {%>
+        <div style="background-color: crimson;">Cliente Removido com sucesso</div>
+    <% } %>
+    
+    <table class="container table table-striped">
+        <th>Id</th>
+        <th>Nome</th>
+        <th>Idade</th>
+        <th>Detalhar</th>
+        <th>Remover</th>
+        <th>Atualizar</th>
+
+    <% for (const cliente of dbClientes) { %> <!--Ou "listaClientes" se for Vetor e "dbClientes" se for DB-->
+
+        
+            <tr>
+            <td><%= cliente.id %></td>
+            <td><%= cliente.nome %></td>
+            <td><%= cliente.idade %></td>
+            <td>
+                <a class="btn btn-secondary" href="/clientes/<%= cliente.id %>">Detalhar</a>
+            </td>
+            <td>
+                <a class="btn btn-danger" onclick="return confirm('Deseja realmente remover?')" href="/clientes/remover/<%= cliente.id %>">Remover</a>
+            </td>
+            <td>
+                <a class="btn btn-info" href="/clientes/cadastrar/<%= cliente.id %>">Atualizar</a>
+            </td>
+            </tr>
+        </table>
+        
+        <div>
+            Seu nome é <%= cliente.nome %> e você tem <%= cliente.idade %> anos
+        </div>
+    <% } %>
+
+    <a href="/">Voltar para Página Inicial</a>
+    <%- include("../partials/rodape.ejs") %> 
+</body>
+</html>
