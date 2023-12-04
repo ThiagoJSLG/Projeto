@@ -83,7 +83,7 @@ class UsuarioControllerDB{
     }   
 
     static async detalharUsuario(req, res){
-        const usuario = await UsuarioModel.findOne({_id: req.body._id})
+        const usuario = await UsuarioModel.findOne({_id: req.params._id})
         res.render("usuario/detalhar", {usuario});
     };
 };

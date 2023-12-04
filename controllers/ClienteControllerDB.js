@@ -45,7 +45,7 @@ class ClienteControllerDB{
     }
 
     static async detalharCliente(req, res){
-        const cliente = await ClienteModel.findOne({id: req.body.id});
+        const cliente = await ClienteModel.findOne({id: req.params.id});
         res.render("cliente/detalhar", {cliente});
     }
 };
