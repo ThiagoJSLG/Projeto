@@ -5,28 +5,21 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Page Title</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
     <%- include("../partials/cabecalho.ejs") %>
 </head>
 <body>
     <form action="/clientes?s=1" method="post">
-        <input type="hidden" name="_id" value="<% cliente._id %>">
+        <input type="hidden" name="_id" value="<%= cliente._id %>">
+
+        Nome: <input value="<%= cliente.nome %>"  type="text" name="nome" required>
+
         Id: <input <% if(cliente.id != undefined){ %> readonly <% } %> value="<% cliente.id %>" type="text" name="id" required>
-        Nome: <input value="<% cliente.nome %>"  type="text" name="nome" required>
-        Idade: <input value="<% cliente.idade %>"  type="text" name="idade">
+
+        Tipo de seguro: <input value="<%= cliente.seguro %>"  type="number" name="seguro">
         <input type="submit" value="Salvar">
     </form>
 
-    <!--<div class="container">
-        <div class="mb-3">
-            <label for="nome1" class="form-control">Nome: </label>
-            <input type="text" class="form-control" name="name1">
-        </div>
-    </div>-->
-    
-
-    <a href="/">Voltar para Página Inicial</a>
+    <a href="/">Voltar para Página Inicial</a><br>
     <%- include("../partials/rodape.ejs") %>
 </body>
 </html>

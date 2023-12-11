@@ -21,7 +21,7 @@
     <table class="container table table-striped">
         <th>Id</th>
         <th>Nome</th>
-        <th>Idade</th>
+        <th>Tipo de Seguro</th>
         <th>Detalhar</th>
         <th>Remover</th>
         <th>Atualizar</th>
@@ -32,7 +32,7 @@
             <tr>
             <td><%= cliente.id %></td>
             <td><%= cliente.nome %></td>
-            <td><%= cliente.idade %></td>
+            <td><%= cliente.seguro %></td>
             <td>
                 <a class="btn btn-secondary" href="/clientes/<%= cliente.id %>">Detalhar</a>
             </td>
@@ -46,7 +46,7 @@
         </table>
         
         <div>
-            Seu nome é <%= cliente.nome %> e você tem <%= cliente.idade %> anos
+            Seu nome é <%= cliente.nome %> e você tem o seguro do tipo: <%= cliente.idade %>
         </div>
     <% } %>
 

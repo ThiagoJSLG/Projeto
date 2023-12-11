@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const clienteSchema = Schema({
     id: Number,
     nome: String,
-    idade: Number    
+    seguro: Number    
     });
 
     module.exports = mongoose.model("Cliente", clienteSchema);

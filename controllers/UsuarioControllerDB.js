@@ -4,7 +4,7 @@ const UsuarioModel = require("../models/UsuarioModel");
 const usuarioSchema = require("../models/UsuarioModel");
 
 class UsuarioControllerDB{
-    static async cadastrar(req,res){
+    /*static async cadastrar(req,res){
         //const _id = req.body._id;
         const salt = bcryptjs.genSaltSync();
         const hash = bcryptjs.hashSync(req.body.senha, salt);
@@ -28,10 +28,75 @@ class UsuarioControllerDB{
             }
             res.redirect("/usuarios?s=1");
         }
+        else if(usuario != null){
+            if (req.body._id != null){
+                await UsuarioModel.findOneAndUpdate({_id: req.body._id}, {
+                    nome: req.body.nome,
+                    email: req.body.email,
+                    senha: hash
+                });
+            }
+            else{
+                const novoUsuario = new usuarioSchema({ // Aula 11/09/23 e Aula 18/09/23
+                    email: req.body.email,
+                    nome: req.body.nome,
+                    senha: hash
+                });
+                await novoUsuario.save(); //end
+            }
+            res.redirect("/usuarios?s=1");
+        }
         else{
             res.redirect(`/usuarios/cadastrar?s=1&nome=${req.body.nome}&email=${req.body.email}`);
         }
         
+    }*/
+
+    static async cadastrar(req,res){
+        const salt = bcryptjs.genSaltSync();
+        const hash = bcryptjs.hashSync(req.body.senha, salt);
+        const usuario = await UsuarioModel.findOne({email: req.body.email});
+        //const _id = req.body._id;
+        if (req.body._id == ""){
+            if(usuario == null){
+                const novoUsuario = new UsuarioModel({
+                    email: req.body.email,
+                    nome: req.body.nome,
+                    senha: hash
+                });
+                await novoUsuario.save();
+                res.redirect("/usuarios?s=1");
+            }
+            else{
+                res.redirect(`/usuarios/cadastrar?s=1&nome=${req.body.nome}&email=${req.body.email}`);
+            }
+        }else {
+            const usuarioAtual = await UsuarioModel.findOne({_id: req.body._id});
+            const usuarioNovo = await UsuarioModel.findOne({email: req.body.email});
+            if(usuario == null || usuarioAtual.email == req.body.email){
+                if (req.body._id == ""){
+                    const usuario = await UsuarioModel.findOne({email: req.body.email})
+                    if(usuario == null){
+                        const novoUsuario = new usuarioSchema({ // Aula 11/09/23 e Aula 18/09/23
+                            email: req.body.email,
+                            nome: req.body.nome,
+                            senha: hash
+                        });
+                    }
+                    await novoUsuario.save(); //end
+                }
+                else{
+                    await UsuarioModel.findOneAndUpdate({_id: req.body._id}, {
+                        nome: req.body.nome,
+                        email: req.body.email,
+                        senha: hash
+                    });
+                };        
+                res.redirect("/usuarios?s=1");
+            } else{
+                res.redirect(`/usuarios/cadastrar?s=1&nome=${req.body.nome}&email=${req.body.email}`);
+            }
+        }
     }
 
     static async cadastrarGet(req,res){
